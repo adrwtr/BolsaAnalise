@@ -1,0 +1,11 @@
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (1, 3, '2014-1-10', '40 onibus incendiados em SP', '40 onibus incendiados em SP');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (2, 1, '2014-1-10', 'Presitende Dilma troca ministros da casa civil, educação e saude', 'Presitende Dilma troca ministros da casa civil, educação e saude');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (3, 3, '2014-2-2', 'Super falha de energia no brasil', 'Super falha de energia no brasil');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (4, 3, '2014-3-1', 'Grande Falta de água em bairros de SP', 'Grande Falta de água em bairros de SP');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (5, 2, '2014-3-15', 'Investigação da Petrobras - Fato Negativo', 'Investigação da Petrobras - Fato Negativo');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (6, 3, '2014-3-29', 'Sabesp: Agua garantida até final do ano sem SP', 'Sabesp: Agua garantida até final do ano sem SP');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (7, 1, '2014-5-26', 'Reajuste 10% Bolsa Familia', 'Reajuste 10% Bolsa Familia');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (8, 3, '2014-6-1', 'Copa do Mundo Brasil', 'Copa do Mundo Brasil');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (9, 3, '2014-6-28', 'Fim da Copa', 'Fim da Copa');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (10, 1, '2014-7-15', 'Eleições Presidente Brasil - Início Política', 'Eleições Presidente Brasil - Início Política');
+INSERT INTO `noticias` (`cd_noticia`, `cd_categoria`, `dt_noticia`, `ds_titulo`, `ds_descricao`) VALUES (11, 1, '2014-8-1', 'Morte concorrente presidencia', 'Morte concorrente presidencia');
