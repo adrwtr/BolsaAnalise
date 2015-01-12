@@ -67,7 +67,7 @@ $objPDOStatement->closeCursor();
   
 <html>
 <head>
-   <script src="externos/chart.js/Chart.js"></script>
+   <script src="externos/chartjs/Chart.js"></script>
    <script language="javascript">
 
    var data = {
