@@ -21,6 +21,8 @@ php composer.phar require slim/slim
 php composer.phar require slim/psr7
 php composer.phar require php-di/php-di --with-all-dependencies
 php composer.phar require phpunit/phpunit
+php composer.phar require symfony/var-dumper
+php composer.phar require guzzlehttp/guzzle
 ```
 
 
