@@ -25,7 +25,46 @@ class LeitorFundamentus {
 
         $arrValores = [];
 
-        $arrMetaDado = [
+        $arrMetaDado = $this->getArrMetaDados();
+
+        foreach($tableElement as $id => $tableRow) {
+            $string_valor_atual = $tableRow->nodeValue;
+            $string_valor_atual = $this->limparStringMetadado($string_valor_atual);
+
+            if (in_array($string_valor_atual, $arrMetaDado)) {
+                $string_valor_desejado = $tableElement[$id+1]->nodeValue;
+                $string_valor_desejado = $this->limparStringValor($string_valor_desejado);
+
+                $arrValores[$string_valor_atual] = $string_valor_desejado;
+            }
+        }
+        var_dump($arrValores);
+
+        die();
+        $response->getBody()->write("teste of groups");
+        return $response;
+    }
+
+    private function limparStringMetadado($string_valor_atual) : string
+    {
+        $string_valor_atual = str_replace("?", "", $string_valor_atual);
+        $string_valor_atual = trim($string_valor_atual);
+
+        return $string_valor_atual;
+    }
+
+    private function limparStringValor($string_valor_desejado) : string
+    {
+        $string_valor_desejado = preg_replace("/\r|\n/", "", $string_valor_desejado);
+        $string_valor_desejado = trim(str_replace("\"","", $string_valor_desejado));
+        $string_valor_desejado = ltrim($string_valor_desejado, "\n");
+
+        return $string_valor_desejado;
+    }
+
+    private function getArrMetaDados()
+    {
+        return [
             'Papel'
             , 'Cotação'
             , 'Tipo'
@@ -69,26 +108,5 @@ class LeitorFundamentus {
             , 'EBIT'
             , 'Lucro Líquido'
         ];
-
-        foreach($tableElement as $id => $tableRow) {
-            $string_valor_atual = $tableRow->nodeValue;
-            $string_valor_atual = str_replace("?", "", $string_valor_atual);
-            $string_valor_atual = trim($string_valor_atual);
-
-            if (in_array($string_valor_atual, $arrMetaDado)) {
-                $string_valor_desejado = $tableElement[$id+1]->nodeValue;
-
-                $string_valor_desejado = preg_replace("/\r|\n/", "", $string_valor_desejado);
-                $string_valor_desejado = trim(str_replace("\"","", $string_valor_desejado));
-                $string_valor_desejado = ltrim($string_valor_desejado, "\n");
-
-                $arrValores[$string_valor_atual] = $string_valor_desejado;
-            }
-        }
-        var_dump($arrValores);
-
-        die();
-        $response->getBody()->write("teste of groups");
-        return $response;
     }
 }
