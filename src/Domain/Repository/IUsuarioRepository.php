@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Akuma\BolsaAnalise\Domain\Repository;
 
-use App\Domain\Model\Usuario;
+use Akuma\BolsaAnalise\Domain\Model\Usuario;
 
 interface IUsuarioRepository
 {

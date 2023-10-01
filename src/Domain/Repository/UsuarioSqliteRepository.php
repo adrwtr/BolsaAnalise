@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Akuma\BolsaAnalise\Domain\Repository;
 
-use App\Domain\Model\Usuario;
+use Akuma\BolsaAnalise\Domain\Model\Usuario;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
@@ -43,7 +43,7 @@ class UsuarioSQLiteRepository implements IUsuarioRepository
     public function findUsuarioById(int $id): Usuario
     {
         $arrUsuario = $this->getEntityManager()->find(
-            \App\Domain\Model\Usuario::class,
+            \Akuma\BolsaAnalise\Domain\Model\Usuario::class,
             $id
         );
 

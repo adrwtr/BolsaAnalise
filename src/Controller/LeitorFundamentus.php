@@ -19,10 +19,8 @@ class LeitorFundamentus {
 
     public function __construct(IUsuarioRepository $i)
     {
-        // $this->container = $container;
-
-        // dump($this->container->get(IUsuarioRepository::class));
-        dump($i);
+        $i->insert(['ds_nome' => 'adriano ' . date("H:i:s")]);
+        dump($i->findAll());
         die();
     }
 

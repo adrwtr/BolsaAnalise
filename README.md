@@ -14,6 +14,7 @@ Como vamos fazer:
     2 - Criar banco de dados e infra usando melhores praticas, ddd e tdd
     3 - Criar paineis para comprarar valores das empresas e comparar as empresas entre si
 
+
 ## Set de instalação
 
 ```
@@ -31,3 +32,11 @@ php composer.phar require doctrine/annotations
 
 ```
 
+## Comandos
+
+```
+na raiz - windows
+cd ./public
+php ..\vendor\bin\doctrine orm:validate-schema
+php ..\vendor\bin\doctrine orm:schema-tool:drop --force
+php ..\vendor\bin\doctrine orm:schema-tool:create
