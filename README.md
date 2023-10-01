@@ -22,7 +22,12 @@ php composer.phar require slim/psr7
 php composer.phar require php-di/php-di --with-all-dependencies
 php composer.phar require phpunit/phpunit
 php composer.phar require symfony/var-dumper
+php composer.phar require symfony/yaml
+php composer.phar require symfony/cache
 php composer.phar require guzzlehttp/guzzle
-```
+php composer.phar require gdoctrine/orm
+php composer.phar require doctrine/dbal
+php composer.phar require doctrine/annotations
 
+```
 

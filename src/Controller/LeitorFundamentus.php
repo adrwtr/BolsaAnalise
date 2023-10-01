@@ -7,9 +7,26 @@ use Psr\Log\LoggerInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 
+use Psr\Container\ContainerInterface;
+
 use Akuma\BolsaAnalise\Service\LeitorUrl;
+use Akuma\BolsaAnalise\Service\UsuarioService;
+use Akuma\BolsaAnalise\Domain\Repository\IUsuarioRepository;
 
 class LeitorFundamentus {
+
+    private $container;
+
+    public function __construct(IUsuarioRepository $i)
+    {
+        // $this->container = $container;
+
+        // dump($this->container->get(IUsuarioRepository::class));
+        dump($i);
+        die();
+    }
+
+
     public function action(Request $request, Response $response, array $args) : Response
     {
         $objLeitorUrl = new LeitorUrl();
@@ -42,6 +59,19 @@ class LeitorFundamentus {
 
         die();
         $response->getBody()->write("teste of groups");
+        return $response;
+    }
+
+    public function usuario(Request $request, Response $response, array $args) : Response
+    {
+        // $myService = $this->get(IUsuarioRepository::class);
+        dump($args);
+        die();
+        // $objUsuarioService = new UsuarioService(
+
+        // );
+
+        $response->getBody()->write("teste of usuarios");
         return $response;
     }
 
