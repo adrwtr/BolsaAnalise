@@ -7,36 +7,86 @@ use Psr\Log\LoggerInterface;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpNotFoundException;
 
-use GuzzleHttp\Client;
-
-
+use Akuma\BolsaAnalise\Service\LeitorUrl;
 
 class LeitorFundamentus {
     public function action(Request $request, Response $response, array $args) : Response
     {
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://www.fundamentus.com.br',
-            // You can set any number of default request options.
-            'timeout'  => 2.0,
-        ]);
-
-        $response = $client->request('GET', '/detalhes.php?papel=VALE3');
-        $body = $response->getBody();
+        $objLeitorUrl = new LeitorUrl();
+        $body = $objLeitorUrl->fakeLerUrl();
+        $body = base64_decode($body);
 
          // Suppress libxml errors
         libxml_use_internal_errors(true);
-
 
         $document = new \DOMDocument();
         $document->loadHtml($body, LIBXML_NOWARNING | LIBXML_NOERROR);
         $tableElement = $document->getElementsByTagName("td");
 
-        foreach($tableElement as $tableRow) {
-            dump($tableRow->nodeValue);
-            // and so on ..
-            // do your processing of table rows and data here
+        $arrValores = [];
+
+        $arrMetaDado = [
+            'Papel'
+            , 'Cotação'
+            , 'Tipo'
+            , 'Data últ cot'
+            , 'Empresa'
+            , 'Setor'
+            , 'Subsetor'
+            , 'Valor de mercado'
+            , 'Últ balanço processado'
+            , 'Valor da firma'
+            , 'Nro. Ações'
+            , 'P/L'
+            , 'LPA'
+            , 'P/VP'
+            , 'VPA'
+            , 'P/EBIT'
+            , 'Marg. Bruta'
+            , 'PSR'
+            , 'Marg. EBIT'
+            , 'P/Ativos'
+            , 'Marg. Líquida'
+            , 'P/Cap. Giro'
+            , 'EBIT / Ativo'
+            , 'P/Ativ Circ Liq'
+            , 'ROIC'
+            , 'Div. Yield'
+            , 'ROE'
+            , 'EV / EBITDA'
+            , 'Liquidez Corr'
+            , 'EV / EBIT'
+            , 'Div Br/ Patrim'
+            , 'Cres. Rec (5a)'
+            , 'Giro Ativos'
+            , 'Ativo'
+            , 'Dív. Bruta'
+            , 'Disponibilidades'
+            , 'Dív. Líquida'
+            , 'Ativo Circulante'
+            , 'Patrim. Líq'
+            , 'Receita Líquida'
+            , 'EBIT'
+            , 'Lucro Líquido'
+        ];
+
+        foreach($tableElement as $id => $tableRow) {
+            $string_valor_atual = $tableRow->nodeValue;
+            $string_valor_atual = str_replace("?", "", $string_valor_atual);
+            $string_valor_atual = trim($string_valor_atual);
+
+            if (in_array($string_valor_atual, $arrMetaDado)) {
+                $string_valor_desejado = $tableElement[$id+1]->nodeValue;
+
+                $string_valor_desejado = preg_replace("/\r|\n/", "", $string_valor_desejado);
+                $string_valor_desejado = trim(str_replace("\"","", $string_valor_desejado));
+                $string_valor_desejado = ltrim($string_valor_desejado, "\n");
+
+                $arrValores[$string_valor_atual] = $string_valor_desejado;
+            }
         }
+        var_dump($arrValores);
+
         die();
         $response->getBody()->write("teste of groups");
         return $response;
