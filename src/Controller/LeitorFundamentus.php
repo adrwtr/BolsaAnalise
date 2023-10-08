@@ -10,18 +10,16 @@ use Slim\Exception\HttpNotFoundException;
 use Psr\Container\ContainerInterface;
 
 use Akuma\BolsaAnalise\Service\LeitorUrl;
-use Akuma\BolsaAnalise\Service\UsuarioService;
-use Akuma\BolsaAnalise\Domain\Repository\IUsuarioRepository;
+// use Akuma\BolsaAnalise\Service\UsuarioService;
+use Akuma\BolsaAnalise\Service\AcaoService;
 
 class LeitorFundamentus {
 
-    private $container;
+    private $objAcaoService;
 
-    public function __construct(IUsuarioRepository $i)
+    public function __construct(AcaoService $objAcaoService)
     {
-        $i->insert(['ds_nome' => 'adriano ' . date("H:i:s")]);
-        dump($i->findAll());
-        die();
+        $this->objAcaoService = $objAcaoService;
     }
 
 
@@ -53,25 +51,29 @@ class LeitorFundamentus {
                 $arrValores[$string_valor_atual] = $string_valor_desejado;
             }
         }
-        var_dump($arrValores);
+
+        $ds_papel = $arrValores['Papel'];
+        $ds_tipo_papel = $arrValores['Tipo'];
+        $ds_nome_empresa = $arrValores['Empresa'];
+        $ds_setor = $arrValores['Setor'];
+        $ds_subsetor = $arrValores['Subsetor'];
+
+        $enti = $this->objAcaoService->inserirAcao([
+            'ds_papel' => $ds_papel,
+            'ds_tipo_papel' => $ds_tipo_papel,
+            'ds_nome_empresa' => $ds_nome_empresa,
+            'ds_setor' => $ds_setor,
+            'ds_subsetor' => $ds_subsetor
+        ]);
+        dump($enti);
+        die();
 
         die();
         $response->getBody()->write("teste of groups");
         return $response;
     }
 
-    public function usuario(Request $request, Response $response, array $args) : Response
-    {
-        // $myService = $this->get(IUsuarioRepository::class);
-        dump($args);
-        die();
-        // $objUsuarioService = new UsuarioService(
 
-        // );
-
-        $response->getBody()->write("teste of usuarios");
-        return $response;
-    }
 
     private function limparStringMetadado($string_valor_atual) : string
     {
