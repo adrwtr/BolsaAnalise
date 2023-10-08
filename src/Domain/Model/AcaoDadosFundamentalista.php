@@ -26,227 +26,235 @@ class AcaoDadosFundamentalista extends BaseModel
      * @Column(type="integer")
      * @GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    public $id;
 
     /**
      * @ManyToOne(targetEntity="Acao", inversedBy="arrAcaoDadosFundamentalista")
      * @JoinColumn(name="acao_id", referencedColumnName="id", nullable=false)
      */
-    private $objAcao;
+    public $objAcao;
 
     /**
      * @var \DateTime
-     * @Column(type="datetime", unique=false, nullable=false)
+     * @Column(type="datetime", unique=false, nullable=true)
      */
-    private $dt_leitura;
-
-    /**
-     * @var \DateTime
-     * @Column(type="datetime", unique=false, nullable=false)
-     */
-    private $dt_balanco;
+    public $dt_balanco;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_valor_mercado;
+    public $vl_valor_mercado;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_valor_firma;
+    public $vl_valor_firma;
 
     /**
      * @var int
-     * @Column(type="integer", unique=false, nullable=false)
+     * @Column(type="integer", unique=false, nullable=true)
      */
-    private $nr_qtd_acoes;
+    public $nr_qtd_acoes;
 
     // balanço patrimonial
 
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_ativo;
+    public $vl_ativo;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_div_bruta;
+    public $vl_div_bruta;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_disponibilidades;
+    public $vl_disponibilidades;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_div_liquida;
+    public $vl_div_liquida;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_ativo_circulante;
+    public $vl_ativo_circulante;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_patrimonio_liquido;
+    public $vl_patrimonio_liquido;
 
 
     // demonstrativo de resultados ultimos 3 meses
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_receita_liquida;
+    public $vl_receita_liquida;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_ebit;
+    public $vl_ebit;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_lucro_liquido;
+    public $vl_lucro_liquido;
 
 
     // indicadores fundamentalistas
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_p_l;
+    public $vl_p_l;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_lpa;
+    public $vl_lpa;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_p_vp;
+    public $vl_p_vp;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_vpa;
+    public $vl_vpa;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_p_ebit;
+    public $vl_p_ebit;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_margem_bruta;
+    public $vl_margem_bruta;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_psr;
+    public $vl_psr;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_margem_ebit;
+    public $vl_margem_ebit;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_p_ativos;
+    public $vl_p_ativos;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_margem_liquida;
+    public $vl_margem_liquida;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_p_capital_giro;
+    public $vl_p_capital_giro;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_ebit_ativo;
+    public $vl_ebit_ativo;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_p_ativ_circ_liq;
+    public $vl_p_ativ_circ_liq;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_roic;
+    public $vl_roic;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_roe;
+    public $vl_roe;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_ev_ebitda;
+    public $vl_ev_ebitda;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_ev_ebit;
+    public $vl_ev_ebit;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_div_br_patrim;
+    public $vl_div_br_patrim;
 
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_cres_rec;
+    public $vl_cres_rec;
 
     /**
      * @var float
-     * @Column(type="float", unique=false, nullable=false)
+     * @Column(type="float", unique=false, nullable=true)
      */
-    private $vl_giro_ativos;
+    public $vl_giro_ativos;
 
+    public function __construct(
+        $objAcao,
+        $arrDados
+    ) {
+        $this->objAcao = $objAcao;
+
+        foreach($arrDados as $ds_campo => $mixed_valor) {
+            $this->$ds_campo = $mixed_valor;
+        }
+
+        $this->dt_cadastro = new \DateTime("now");
+        $this->dt_atualizacao = new \DateTime("now");
+        $this->dt_exclusao = null;
+    }
 
 }

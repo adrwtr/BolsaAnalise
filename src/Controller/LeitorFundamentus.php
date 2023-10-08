@@ -12,14 +12,20 @@ use Psr\Container\ContainerInterface;
 use Akuma\BolsaAnalise\Service\LeitorUrl;
 // use Akuma\BolsaAnalise\Service\UsuarioService;
 use Akuma\BolsaAnalise\Service\AcaoService;
+use Akuma\BolsaAnalise\Service\AcaoDadosFundamentalistaService;
+
 
 class LeitorFundamentus {
 
     private $objAcaoService;
+    private $objAcaoDadosFundamentalistaService;
 
-    public function __construct(AcaoService $objAcaoService)
-    {
+    public function __construct(
+        AcaoService $objAcaoService,
+        AcaoDadosFundamentalistaService $objAcaoDadosFundamentalistaService
+    ) {
         $this->objAcaoService = $objAcaoService;
+        $this->objAcaoDadosFundamentalistaService = $objAcaoDadosFundamentalistaService;
     }
 
 
@@ -58,15 +64,96 @@ class LeitorFundamentus {
         $ds_setor = $arrValores['Setor'];
         $ds_subsetor = $arrValores['Subsetor'];
 
-        $enti = $this->objAcaoService->inserirAcao([
+        // insere a acao
+        $objAcao = $this->objAcaoService->inserirAcao([
             'ds_papel' => $ds_papel,
             'ds_tipo_papel' => $ds_tipo_papel,
             'ds_nome_empresa' => $ds_nome_empresa,
             'ds_setor' => $ds_setor,
             'ds_subsetor' => $ds_subsetor
         ]);
-        dump($enti);
-        die();
+
+        $dt_balanco = \DateTime::createFromFormat("d/m/Y", $arrValores['Últ balanço processado']);
+        $vl_valor_mercado = $arrValores['Valor de mercado'];
+        $vl_valor_firma = $arrValores['Valor da firma'];
+
+        $nr_qtd_acoes = $arrValores['Nro. Ações'];
+        $vl_ativo = $arrValores['Ativo'];
+        $vl_div_bruta = $arrValores['Dív. Bruta'];
+        $vl_disponibilidades = $arrValores['Disponibilidades'];
+        $vl_div_liquida = $arrValores['Dív. Líquida'];
+        $vl_ativo_circulante = $arrValores['Ativo Circulante'];
+        $vl_patrimonio_liquido = $arrValores['Patrim. Líq'];
+        $vl_receita_liquida = $arrValores['Receita Líquida'];
+        $vl_ebit = $arrValores['EBIT'];
+        $vl_lucro_liquido = $arrValores['Lucro Líquido'];
+
+        $vl_p_l = $arrValores['P/L'];
+        $vl_lpa = $arrValores['LPA'];
+        $vl_p_vp = $arrValores['P/VP'];
+        $vl_vpa = $arrValores['VPA'];
+        $vl_p_ebit = $arrValores['P/EBIT'];
+        $vl_margem_bruta = $arrValores['Marg. Bruta'];
+        $vl_psr = $arrValores['PSR'];
+        $vl_margem_ebit = $arrValores['Marg. EBIT'];
+        $vl_p_ativos = $arrValores['P/Ativos'];
+        $vl_margem_liquida = $arrValores['Marg. Líquida'];
+        $vl_p_capital_giro = $arrValores['P/Cap. Giro'];
+        $vl_ebit_ativo = $arrValores['EBIT / Ativo'];
+        $vl_p_ativ_circ_liq = $arrValores['P/Ativ Circ Liq'];
+        $vl_roic = $arrValores['ROIC'];
+        $vl_roe = $arrValores['ROE'];
+        $vl_ev_ebitda = $arrValores['EV / EBITDA'];
+        $vl_ev_ebit = $arrValores['EV / EBIT'];
+        $vl_div_br_patrim = $arrValores['Div Br/ Patrim'];
+        $vl_cres_rec = $arrValores['Cres. Rec (5a)'];
+        $vl_giro_ativos = $arrValores['Giro Ativos'];
+
+        // insere os dados fundamenalistas
+        $objAcaoDadosFundamentalistaService = $this->objAcaoDadosFundamentalistaService
+            ->inserirAcaoDadosFundamentalista(
+                $objAcao,
+                [
+                    'dt_balanco' => $dt_balanco,
+                    'vl_valor_mercado' => $vl_valor_mercado,
+                    'vl_valor_firma' => $vl_valor_firma,
+
+
+                    'nr_qtd_acoes' => $nr_qtd_acoes,
+                    'vl_ativo' => $vl_ativo,
+                    'vl_div_bruta' => $vl_div_bruta,
+                    'vl_disponibilidades' => $vl_disponibilidades,
+                    'vl_div_liquida' => $vl_div_liquida,
+                    'vl_ativo_circulante' => $vl_ativo_circulante,
+                    'vl_patrimonio_liquido' => $vl_patrimonio_liquido,
+                    'vl_receita_liquida' => $vl_receita_liquida,
+                    'vl_ebit' => $vl_ebit,
+                    'vl_lucro_liquido' => $vl_lucro_liquido,
+                    'vl_p_l' => $vl_p_l,
+                    'vl_lpa' => $vl_lpa,
+                    'vl_p_vp' => $vl_p_vp,
+                    'vl_vpa' => $vl_vpa,
+                    'vl_p_ebit' => $vl_p_ebit,
+                    'vl_margem_bruta' => $vl_margem_bruta,
+                    'vl_psr' => $vl_psr,
+                    'vl_margem_ebit' => $vl_margem_ebit,
+                    'vl_p_ativos' => $vl_p_ativos,
+                    'vl_margem_liquida' => $vl_margem_liquida,
+                    'vl_p_capital_giro' => $vl_p_capital_giro,
+                    'vl_ebit_ativo' => $vl_ebit_ativo,
+                    'vl_p_ativ_circ_liq' => $vl_p_ativ_circ_liq,
+                    'vl_roic' => $vl_roic,
+                    'vl_roe' => $vl_roe,
+                    'vl_ev_ebitda' => $vl_ev_ebitda,
+                    'vl_ev_ebit' => $vl_ev_ebit,
+                    'vl_div_br_patrim' => $vl_div_br_patrim,
+                    'vl_cres_rec' => $vl_cres_rec,
+                    'vl_giro_ativos' => $vl_giro_ativos,
+
+                ]
+            );
+
+        dump($objAcaoDadosFundamentalistaService);
 
         die();
         $response->getBody()->write("teste of groups");

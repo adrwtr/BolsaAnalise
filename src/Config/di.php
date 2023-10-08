@@ -6,6 +6,10 @@ use Akuma\BolsaAnalise\Domain\Repository\Acao\IAcaoRepository;
 use Akuma\BolsaAnalise\Domain\Repository\Acao\AcaoSQLiteRepository;
 use Akuma\BolsaAnalise\Service\AcaoService;
 
+use Akuma\BolsaAnalise\Domain\Repository\Acao\IAcaoDadosFundamentalistaRepository;
+use Akuma\BolsaAnalise\Domain\Repository\Acao\AcaoDadosFundamentalistaSQLiteRepository;
+use Akuma\BolsaAnalise\Service\AcaoDadosFundamentalistaService;
+
 use Akuma\BolsaAnalise\Controller\LeitorFundamentus;
 
 use DI\ContainerBuilder;
@@ -22,8 +26,13 @@ return function (ContainerBuilder $containerBuilder, bool $sn_test) {
             ? \DI\autowire(AcaoSQLiteRepository::class)
             : \DI\autowire(AcaoSQLiteRepository::class),
 
+        IAcaoDadosFundamentalistaRepository::class => $sn_test
+            ? \DI\autowire(AcaoDadosFundamentalistaSQLiteRepository::class)
+            : \DI\autowire(AcaoDadosFundamentalistaSQLiteRepository::class),
+
         // lista de services
         AcaoService::class => \DI\autowire(AcaoService::class),
+        AcaoDadosFundamentalistaService::class => \DI\autowire(AcaoDadosFundamentalistaService::class),
 
         // LeitorFundamentus::class => \DI\autowire(LeitorFundamentus::class)
         // sqlite

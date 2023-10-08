@@ -7,6 +7,7 @@ use DI\ContainerBuilder;
 use Psr\Container\ContainerInterface;
 use Slim\Factory\ServerRequestCreatorFactory;
 
+use Akuma\BolsaAnalise\Controller\Index;
 use Akuma\BolsaAnalise\Controller\LeitorFundamentus;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -32,14 +33,7 @@ $app = AppFactory::create();
 $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
-
-// $container->set('LeitorFundamentus', function (ContainerInterface $container) {
-//     // retrieve the 'view' from the container
-//     // $view = $container->get('IUsuarioRepository');
-
-//     return new LeitorFundamentus($container);
-// });
-
+$app->get('/', [Index::class, 'indexAction']);
 
 $app->group('/reader', function (Group $group) use ($app) {
     $group->get(
