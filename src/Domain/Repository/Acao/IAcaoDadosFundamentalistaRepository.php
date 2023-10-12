@@ -7,5 +7,5 @@ use Akuma\BolsaAnalise\Domain\Model\Acao;
 interface IAcaoDadosFundamentalistaRepository
 {
     public function insert(Acao $objAcao, array $arrValores): AcaoDadosFundamentalista;
-    // public function find(string $ds_papel): AcaoDadosFundamentalista;
+    public function findByDate(Acao $objAcao, \DateTime $objDtPesquisa): AcaoDadosFundamentalista;
 }

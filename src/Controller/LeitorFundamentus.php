@@ -77,7 +77,7 @@ class LeitorFundamentus {
         $vl_valor_mercado = $arrValores['Valor de mercado'];
         $vl_valor_firma = $arrValores['Valor da firma'];
 
-        $nr_qtd_acoes = $arrValores['Nro. Ações'];
+        $nr_qtd_acoes = (int) str_replace(".", "", $arrValores['Nro. Ações']);
         $vl_ativo = $arrValores['Ativo'];
         $vl_div_bruta = $arrValores['Dív. Bruta'];
         $vl_disponibilidades = $arrValores['Disponibilidades'];
@@ -153,10 +153,7 @@ class LeitorFundamentus {
                 ]
             );
 
-        dump($objAcaoDadosFundamentalistaService);
-
-        die();
-        $response->getBody()->write("teste of groups");
+        $response->getBody()->write("Leitura completa");
         return $response;
     }
 

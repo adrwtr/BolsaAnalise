@@ -62,9 +62,7 @@ class AcaoSQLiteRepository implements IAcaoRepository
         try {
             $objAcao = $this->find($arrValores['ds_papel']);
 
-            if ($objAcao != null) {
-                return $objAcao;
-            }
+            return $objAcao;
         } catch (\Exception $e) {
             $objAcao = null;
         }

@@ -28,37 +28,37 @@ class Acao extends BaseModel
      * @Column(type="integer")
      * @GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    public $id;
 
     /**
      * @var string
      * @Column(type="string", unique=false, nullable=false)
      */
-    private $ds_papel;
+    public $ds_papel;
 
     /**
      * @var string
      * @Column(type="string", unique=false, nullable=false)
      */
-    private $ds_tipo_papel;
+    public $ds_tipo_papel;
 
     /**
      * @var string
      * @Column(type="string", unique=false, nullable=false)
      */
-    private $ds_nome_empresa;
+    public $ds_nome_empresa;
 
     /**
      * @var string
      * @Column(type="string", unique=false, nullable=false)
      */
-    private $ds_setor;
+    public $ds_setor;
 
     /**
      * @var string
      * @Column(type="string", unique=false, nullable=false)
      */
-    private $ds_subsetor;
+    public $ds_subsetor;
 
     /**
      * @OneToMany(targetEntity="AcaoDadosFundamentalista", mappedBy="objAcao")

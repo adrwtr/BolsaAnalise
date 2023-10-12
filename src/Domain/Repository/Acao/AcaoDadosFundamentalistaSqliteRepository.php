@@ -33,32 +33,62 @@ class AcaoDadosFundamentalistaSQLiteRepository implements IAcaoDadosFundamentali
         return $this->em;
     }
 
-    public function find(string $ds_papel) : AcaoDadosFundamentalista
-    {
-        // $objAcao = $this->getEntityManager()
-        //     ->getRepository(
-        //         \Akuma\BolsaAnalise\Domain\Model\Acao::class,
-        //     )->findOneBy([
-        //         'ds_papel' => $ds_papel,
-        //         'dt_exclusao' => null
-        //     ]);
+    public function findByDate(
+        Acao $objAcao,
+        \DateTime $objDtPesquisa
+    ): AcaoDadosFundamentalista  {
+        // busca pela acao
+        // e por algo realizado na data atual
+        $objQuery = $this->getEntityManager()
+            ->createQuery(
+                "SELECT adf FROM "
+                . "\Akuma\BolsaAnalise\Domain\Model\AcaoDadosFundamentalista adf "
+                . "WHERE "
+                . "adf.objAcao = :objAcao "
+                . "AND DATE_DIFF(adf.dt_cadastro, :dt_cadastro) >= 0"
+            );
 
-        // if ($objAcao == null) {
-        //     throw new \Exception(
-        //         "Acao de papel "
-        //         . $ds_papel
-        //         . " não encontrada"
-        //     );
-        // }
+        $objQuery->setParameter(
+            'objAcao',
+            $objAcao
+        );
 
-        // return $objAcao;
+        $objQuery->setParameter(
+            'dt_cadastro',
+            $objDtPesquisa
+        );
+
+        $arrResult = $objQuery->getResult();
+
+        if (count($arrResult) <= 0) {
+            throw new \Exception(
+                "A Acao de papel "
+                . $objAcao->ds_papel
+                . " não possui dados fundamentalistas para a data: "
+                . $objDtPesquisa->format("d/m/Y")
+            );
+        }
+
+        return $arrResult[0];
     }
 
     public function insert(
         Acao $objAcao,
         array $arrValores
-    ): AcaoDadosFundamentalista
-    {
+    ): AcaoDadosFundamentalista {
+        try {
+            $objAcaoDadosFundamentalista = $this->findByDate(
+                $objAcao,
+                new \DateTime("now")
+            );
+
+            return $objAcaoDadosFundamentalista;
+        } catch (\Exception $e) {
+            dump($e);
+            die();
+            $objAcaoDadosFundamentalista = null;
+        }
+
         $objAcaoDadosFundamentalista = new AcaoDadosFundamentalista(
             $objAcao,
             $arrValores

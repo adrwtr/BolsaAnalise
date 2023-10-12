@@ -5,8 +5,8 @@ Objetivos
 
     - Capturar as informações sobre as empresas automaticamente.
         - O que queremos capturar:
-            - Dados básicos como informações da empresa
-            - Dados fundamentalistas e de balanço da empresa
+            OK - Dados básicos como informações da empresa
+            OK - Dados fundamentalistas e de balanço da empresa
             - Histórico de cotações
 
 Como vamos fazer:
