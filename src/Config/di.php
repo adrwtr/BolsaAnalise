@@ -10,6 +10,10 @@ use Akuma\BolsaAnalise\Domain\Repository\Acao\IAcaoDadosFundamentalistaRepositor
 use Akuma\BolsaAnalise\Domain\Repository\Acao\AcaoDadosFundamentalistaSQLiteRepository;
 use Akuma\BolsaAnalise\Service\AcaoDadosFundamentalistaService;
 
+use Akuma\BolsaAnalise\Service\Http\IHttpClient;
+use Akuma\BolsaAnalise\Service\Http\GuzzleClient;
+use Akuma\BolsaAnalise\Service\LeitorUrl;
+
 use Akuma\BolsaAnalise\Controller\LeitorFundamentus;
 
 use DI\ContainerBuilder;
@@ -17,6 +21,11 @@ use DI\ContainerBuilder;
 return function (ContainerBuilder $containerBuilder, bool $sn_test) {
     // Here we map our UserRepository interface to its in memory implementation
     $containerBuilder->addDefinitions([
+
+        // upper services
+        IHttpClient::class => \DI\autowire(GuzzleClient::class),
+        LeitorUrl::class => \DI\autowire(LeitorUrl::class),
+
         // lista de repositories
         IUsuarioRepository::class => $sn_test
             ? \DI\autowire(UsuarioSQLiteRepository::class)

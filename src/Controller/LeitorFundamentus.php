@@ -3,43 +3,35 @@ namespace Akuma\BolsaAnalise\Controller;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Log\LoggerInterface;
-use Slim\Exception\HttpBadRequestException;
-use Slim\Exception\HttpNotFoundException;
-
-use Psr\Container\ContainerInterface;
 
 use Akuma\BolsaAnalise\Service\LeitorUrl;
-// use Akuma\BolsaAnalise\Service\UsuarioService;
 use Akuma\BolsaAnalise\Service\AcaoService;
 use Akuma\BolsaAnalise\Service\AcaoDadosFundamentalistaService;
 
-
 class LeitorFundamentus {
-
     private $objAcaoService;
     private $objAcaoDadosFundamentalistaService;
+    private $objLeitorUrl;
 
     public function __construct(
         AcaoService $objAcaoService,
-        AcaoDadosFundamentalistaService $objAcaoDadosFundamentalistaService
+        AcaoDadosFundamentalistaService $objAcaoDadosFundamentalistaService,
+        LeitorUrl $objLeitorUrl
     ) {
         $this->objAcaoService = $objAcaoService;
         $this->objAcaoDadosFundamentalistaService = $objAcaoDadosFundamentalistaService;
+        $this->objLeitorUrl = $objLeitorUrl;
     }
 
-
-    public function action(Request $request, Response $response, array $args) : Response
+    public function lerAcoes(Request $request, Response $response, array $args) : Response
     {
-        $objLeitorUrl = new LeitorUrl();
-        $body = $objLeitorUrl->fakeLerUrl();
-        $body = base64_decode($body);
+        $ds_body = $this->objLeitorUrl->fakeLerUrl();
 
          // Suppress libxml errors
         libxml_use_internal_errors(true);
 
         $document = new \DOMDocument();
-        $document->loadHtml($body, LIBXML_NOWARNING | LIBXML_NOERROR);
+        $document->loadHtml($ds_body, LIBXML_NOWARNING | LIBXML_NOERROR);
         $tableElement = $document->getElementsByTagName("td");
 
         $arrValores = [];
@@ -73,11 +65,19 @@ class LeitorFundamentus {
             'ds_subsetor' => $ds_subsetor
         ]);
 
-        $dt_balanco = \DateTime::createFromFormat("d/m/Y", $arrValores['Últ balanço processado']);
+        $dt_balanco = \DateTime::createFromFormat(
+            "d/m/Y",
+            $arrValores['Últ balanço processado']
+        );
+
         $vl_valor_mercado = $arrValores['Valor de mercado'];
         $vl_valor_firma = $arrValores['Valor da firma'];
 
-        $nr_qtd_acoes = (int) str_replace(".", "", $arrValores['Nro. Ações']);
+        $nr_qtd_acoes = (int) str_replace(
+            ".", "",
+            $arrValores['Nro. Ações']
+        );
+
         $vl_ativo = $arrValores['Ativo'];
         $vl_div_bruta = $arrValores['Dív. Bruta'];
         $vl_disponibilidades = $arrValores['Disponibilidades'];
@@ -118,7 +118,6 @@ class LeitorFundamentus {
                     'vl_valor_mercado' => $vl_valor_mercado,
                     'vl_valor_firma' => $vl_valor_firma,
 
-
                     'nr_qtd_acoes' => $nr_qtd_acoes,
                     'vl_ativo' => $vl_ativo,
                     'vl_div_bruta' => $vl_div_bruta,
@@ -149,7 +148,6 @@ class LeitorFundamentus {
                     'vl_div_br_patrim' => $vl_div_br_patrim,
                     'vl_cres_rec' => $vl_cres_rec,
                     'vl_giro_ativos' => $vl_giro_ativos,
-
                 ]
             );
 

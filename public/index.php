@@ -38,7 +38,7 @@ $app->get('/', [Index::class, 'indexAction']);
 $app->group('/reader', function (Group $group) use ($app) {
     $group->get(
         '/fundamentus',
-        [LeitorFundamentus::class, 'action']
+        [LeitorFundamentus::class, 'lerAcoes']
     );
 
     $group->get(
