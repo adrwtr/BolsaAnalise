@@ -12,6 +12,8 @@ use Akuma\BolsaAnalise\Controller\LeitorFundamentus;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+date_default_timezone_set('America/Sao_Paulo');
+
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
