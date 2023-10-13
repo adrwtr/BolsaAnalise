@@ -84,8 +84,6 @@ class AcaoDadosFundamentalistaSQLiteRepository implements IAcaoDadosFundamentali
 
             return $objAcaoDadosFundamentalista;
         } catch (\Exception $e) {
-            dump($e);
-            die();
             $objAcaoDadosFundamentalista = null;
         }
 

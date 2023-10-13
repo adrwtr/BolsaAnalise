@@ -7,43 +7,45 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Akuma\BolsaAnalise\Service\LeitorUrl;
 use Akuma\BolsaAnalise\Service\AcaoService;
 use Akuma\BolsaAnalise\Service\AcaoDadosFundamentalistaService;
+use Akuma\BolsaAnalise\Service\HtmlReader\IHtmlReader;
 
 class LeitorFundamentus {
     private $objAcaoService;
     private $objAcaoDadosFundamentalistaService;
-    private $objLeitorUrl;
+    private LeitorUrl $objLeitorUrl;
+
+    private IHtmlReader $objHtmlReader;
 
     public function __construct(
         AcaoService $objAcaoService,
         AcaoDadosFundamentalistaService $objAcaoDadosFundamentalistaService,
-        LeitorUrl $objLeitorUrl
+        LeitorUrl $objLeitorUrl,
+        IHtmlReader $objHtmlReader
     ) {
         $this->objAcaoService = $objAcaoService;
         $this->objAcaoDadosFundamentalistaService = $objAcaoDadosFundamentalistaService;
         $this->objLeitorUrl = $objLeitorUrl;
+        $this->objHtmlReader = $objHtmlReader;
     }
 
     public function lerAcoes(Request $request, Response $response, array $args) : Response
     {
         $ds_body = $this->objLeitorUrl->fakeLerUrl();
 
-         // Suppress libxml errors
-        libxml_use_internal_errors(true);
-
-        $document = new \DOMDocument();
-        $document->loadHtml($ds_body, LIBXML_NOWARNING | LIBXML_NOERROR);
-        $tableElement = $document->getElementsByTagName("td");
+        $arrTableElement = $this->objHtmlReader->getElementsByTagName(
+            "td",
+            $ds_body
+        );
 
         $arrValores = [];
-
         $arrMetaDado = $this->getArrMetaDados();
 
-        foreach($tableElement as $id => $tableRow) {
-            $string_valor_atual = $tableRow->nodeValue;
+        foreach($arrTableElement as $table_id => $objTableRow) {
+            $string_valor_atual = $objTableRow->nodeValue;
             $string_valor_atual = $this->limparStringMetadado($string_valor_atual);
 
             if (in_array($string_valor_atual, $arrMetaDado)) {
-                $string_valor_desejado = $tableElement[$id+1]->nodeValue;
+                $string_valor_desejado = $arrTableElement[$table_id+1]->nodeValue;
                 $string_valor_desejado = $this->limparStringValor($string_valor_desejado);
 
                 $arrValores[$string_valor_atual] = $string_valor_desejado;

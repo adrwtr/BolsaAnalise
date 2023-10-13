@@ -12,6 +12,8 @@ use Akuma\BolsaAnalise\Service\AcaoDadosFundamentalistaService;
 
 use Akuma\BolsaAnalise\Service\Http\IHttpClient;
 use Akuma\BolsaAnalise\Service\Http\GuzzleClient;
+use Akuma\BolsaAnalise\Service\HtmlReader\IHtmlReader;
+use Akuma\BolsaAnalise\Service\HtmlReader\DomReader;
 use Akuma\BolsaAnalise\Service\LeitorUrl;
 
 use Akuma\BolsaAnalise\Controller\LeitorFundamentus;
@@ -25,6 +27,7 @@ return function (ContainerBuilder $containerBuilder, bool $sn_test) {
         // upper services
         IHttpClient::class => \DI\autowire(GuzzleClient::class),
         LeitorUrl::class => \DI\autowire(LeitorUrl::class),
+        IHtmlReader::class => \DI\autowire(DomReader::class),
 
         // lista de repositories
         IUsuarioRepository::class => $sn_test
