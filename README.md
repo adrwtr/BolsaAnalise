@@ -15,6 +15,36 @@ Como vamos fazer:
     3 - Criar paineis para comprarar valores das empresas e comparar as empresas entre si
 
 
+## Análise já realizadas
+
+* Os seguintes valores abaixo são base de calculo:
+
+ - Preço do ativo
+ - Quantidade de ações
+ - Ativo = Todos os bens e direitos da empresa - Tudo o que a empresa é
+ - Divida bruta = vem do balanço
+ - Patrimonio Liquido = Todos os ativos - Todos os Passivos - Isso é o que de fato a empresa tem ou o valor que ela é contando com as dividas
+
+* Outros:
+ - Disponibilidades = valor em caixa
+ - Ativo Circulante = Ativos de rapida disponibilidade
+
+## Calculos
+
+Valor Mercado = Preço Ativo * Qtd Acoes
+Divida Liquida = Divida Bruta - Disponibilidades
+Valor Firma = Valor Mercado + Divida Liquida
+
+# Conclusões
+
+ * Não confundir ATIVO e Patrimonio Liquido
+ * O preço da ação pode ser comparado com o ATIVO e com o Patrimonio Liquido
+ * VL_ATIVO / QTD ACOES = preço a ser comparado
+ * VPA = Patrimonio Liquido / QTD ACOES = preço a ser comparado
+ * Estamos salvando a receita e o lucro liquido dos últimos 3 meses - fazer * 4
+
+
+
 ## Set de instalação
 
 ```
