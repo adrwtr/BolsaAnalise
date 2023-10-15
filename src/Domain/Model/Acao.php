@@ -65,6 +65,11 @@ class Acao extends BaseModel
      */
     public $arrAcaoDadosFundamentalista;
 
+    /**
+     * @OneToMany(targetEntity="AcaoCotacao", mappedBy="objAcao")
+     */
+    public $arrAcaoCotacao;
+
     public function __construct(
         string $ds_papel,
         string $ds_nome_empresa = '',
@@ -83,5 +88,6 @@ class Acao extends BaseModel
         $this->dt_exclusao = null;
 
         $this->arrAcaoDadosFundamentalista = new ArrayCollection();
+        $this->arrAcaoCotacao = new ArrayCollection();
     }
 }

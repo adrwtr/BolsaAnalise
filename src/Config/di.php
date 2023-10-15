@@ -10,6 +10,10 @@ use Akuma\BolsaAnalise\Domain\Repository\Acao\IAcaoDadosFundamentalistaRepositor
 use Akuma\BolsaAnalise\Domain\Repository\Acao\AcaoDadosFundamentalistaSQLiteRepository;
 use Akuma\BolsaAnalise\Service\AcaoDadosFundamentalistaService;
 
+use Akuma\BolsaAnalise\Domain\Repository\Acao\IAcaoCotacaoRepository;
+use Akuma\BolsaAnalise\Domain\Repository\Acao\AcaoCotacaoSQLiteRepository;
+use Akuma\BolsaAnalise\Service\AcaoCotacaoService;
+
 use Akuma\BolsaAnalise\Service\Http\IHttpClient;
 use Akuma\BolsaAnalise\Service\Http\GuzzleClient;
 use Akuma\BolsaAnalise\Service\HtmlReader\IHtmlReader;
@@ -42,9 +46,14 @@ return function (ContainerBuilder $containerBuilder, bool $sn_test) {
             ? \DI\autowire(AcaoDadosFundamentalistaSQLiteRepository::class)
             : \DI\autowire(AcaoDadosFundamentalistaSQLiteRepository::class),
 
+        IAcaoCotacaoRepository::class => $sn_test
+            ? \DI\autowire(AcaoCotacaoSQLiteRepository::class)
+            : \DI\autowire(AcaoCotacaoSQLiteRepository::class),
+
         // lista de services
         AcaoService::class => \DI\autowire(AcaoService::class),
         AcaoDadosFundamentalistaService::class => \DI\autowire(AcaoDadosFundamentalistaService::class),
+        AcaoCotacaoService::class => \DI\autowire(AcaoCotacaoService::class),
 
         // LeitorFundamentus::class => \DI\autowire(LeitorFundamentus::class)
         // sqlite

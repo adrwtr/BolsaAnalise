@@ -24,12 +24,6 @@ class AcaoDadosFundamentalistaService
         return $this->objAcaoDadosFundamentalistaRepository;
     }
 
-    public function procurarAcao($ds_papel): AcaoDadosFundamentalista
-    {
-        return $this->getAcaoDadosFundamentalistaRepository()
-            ->find($ds_papel);
-    }
-
     public function inserirAcaoDadosFundamentalista(
         Acao $objAcao,
         $arrDados) : AcaoDadosFundamentalista {

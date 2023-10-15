@@ -9,10 +9,16 @@ use Slim\Factory\ServerRequestCreatorFactory;
 
 use Akuma\BolsaAnalise\Controller\Index;
 use Akuma\BolsaAnalise\Controller\LeitorFundamentus;
+use Akuma\BolsaAnalise\Controller\LeitorPrecoAcao;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 date_default_timezone_set('America/Sao_Paulo');
+
+
+// read env vars
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 
 // Instantiate PHP-DI ContainerBuilder
@@ -41,6 +47,11 @@ $app->group('/reader', function (Group $group) use ($app) {
     $group->get(
         '/fundamentus',
         [LeitorFundamentus::class, 'lerAcoes']
+    );
+
+    $group->get(
+        '/preco-acoes',
+        [LeitorPrecoAcao::class, 'lerPrecos']
     );
 
     $group->get(

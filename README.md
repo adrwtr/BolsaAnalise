@@ -7,7 +7,7 @@ Objetivos
         - O que queremos capturar:
             OK - Dados básicos como informações da empresa
             OK - Dados fundamentalistas e de balanço da empresa
-            - Histórico de cotações
+            OK - Histórico de cotações
 
 Como vamos fazer:
     1 - Executar um webscrap no fundamentus
@@ -29,8 +29,14 @@ php composer.phar require guzzlehttp/guzzle
 php composer.phar require gdoctrine/orm
 php composer.phar require doctrine/dbal
 php composer.phar require doctrine/annotations
+php composer.phar require vlucas/phpdotenv
 
 ```
+
+Criar um arquivo .env na pasta public com a variável para execucao da api
+do site https://brapi.dev/dashboard
+
+COTACAO_API_TOKEN=1111_TOKEN_1111
 
 ## Comandos
 

@@ -23,4 +23,11 @@ EOF;
 
         return base64_decode($text);
     }
+
+    public function fakeLerUrlAcoes() {
+         $text = <<<EOF
+{"results":[{"symbol":"VALE3","currency":"BRL","twoHundredDayAverage":74.20725,"twoHundredDayAverageChange":-7.617256,"twoHundredDayAverageChangePercent":-0.10264841,"marketCap":286604030000,"shortName":"VALE        ON      NM","longName":"Vale S.A.","regularMarketChange":-0.7700043,"regularMarketChangePercent":-1.143118,"regularMarketTime":"2023-10-13 20:07:48+00","regularMarketPrice":66.59,"regularMarketDayHigh":0,"regularMarketDayRange":"0.0 - 0.0","regularMarketDayLow":0,"regularMarketVolume":0,"regularMarketPreviousClose":67.36,"regularMarketOpen":0,"averageDailyVolume3Month":25272680,"averageDailyVolume10Day":15300600,"fiftyTwoWeekLowChange":66.59,"fiftyTwoWeekLowChangePercent":null,"fiftyTwoWeekRange":"0.0 - 98.29","fiftyTwoWeekHighChange":-31.700005,"fiftyTwoWeekHighChangePercent":-0.32251504,"fiftyTwoWeekLow":0,"fiftyTwoWeekHigh":98.29,"priceEarnings":5.2723255,"earningsPerShare":12.642554,"logourl":"https://s3-symbol-logo.tradingview.com/vale--big.svg","updatedAt":"2023-10-15 14:50:03.64+00"}],"requestedAt":"2023-10-15T14:51:54.340Z","took":"8ms"}
+EOF;
+        return $text;
+    }
 }

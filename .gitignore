@@ -1,5 +1,8 @@
 composer.phar
-/vendor/
 composer.lock
 banco.sqlite
+.env
+
+/vendor/
 /public/banco.sqlite
+/public/.env

@@ -17,6 +17,20 @@ class AcaoService
         $this->objAcaoRepository = $objAcaoRepository;
     }
 
+    public function getArrAcoes()
+    {
+        return [
+            'PETR4'
+            , 'VALE3'
+            , 'SAPR4'
+            , 'ABEV3'
+            , 'ITSA4'
+            , 'COGN3'
+            , 'UGPA3'
+            , 'BBAS3'
+        ];
+    }
+
     public function getAcaoRepository() {
         return $this->objAcaoRepository;
     }

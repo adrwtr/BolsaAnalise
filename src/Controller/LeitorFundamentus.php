@@ -27,24 +27,10 @@ class LeitorFundamentus {
         $this->objLeitorUrl = $objLeitorUrl;
         $this->objHtmlReader = $objHtmlReader;
     }
-    private function getArrAcoes()
-    {
-        return [
-            'PETR4'
-            , 'VALE3'
-            , 'SAPR4'
-            , 'ABEV3'
-            , 'ITSA4'
-            , 'COGN3'
-            , 'UGPA3'
-            , 'ENBR3'
-            , 'BBAS3'
-        ];
-    }
 
     public function lerAcoes(Request $request, Response $response, array $args) : Response
     {
-        $arrAcoes = $this->getArrAcoes();
+        $arrAcoes = $this->objAcaoService->getArrAcoes();
 
         foreach($arrAcoes as $ds_papel) {
             $ds_body = $this->objLeitorUrl->lerUrl(
@@ -59,6 +45,8 @@ class LeitorFundamentus {
                 "td",
                 $ds_body
             );
+
+
 
             $arrValores = [];
             $arrMetaDado = $this->getArrMetaDados();
@@ -76,6 +64,7 @@ class LeitorFundamentus {
             }
 
             $ds_papel = $arrValores['Papel'];
+            $vl_preco_dia = $arrValores['Cotação'];
             $ds_tipo_papel = $arrValores['Tipo'];
             $ds_nome_empresa = $arrValores['Empresa'];
             $ds_setor = $arrValores['Setor'];
@@ -140,6 +129,9 @@ class LeitorFundamentus {
                     $objAcao,
                     [
                         'dt_balanco' => $dt_balanco,
+                        'ds_papel' => $ds_papel,
+                        'vl_preco_dia' => $vl_preco_dia,
+
                         'vl_valor_mercado' => $vl_valor_mercado,
                         'vl_valor_firma' => $vl_valor_firma,
 

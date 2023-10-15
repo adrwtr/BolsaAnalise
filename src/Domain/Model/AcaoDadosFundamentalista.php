@@ -14,6 +14,8 @@ use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
 
+use Akuma\BolsaAnalise\Domain\Model\Acao;
+
 /**
  * @Entity
  * @Table(name="acao_dados_fundamentalista")
@@ -32,7 +34,19 @@ class AcaoDadosFundamentalista extends BaseModel
      * @ManyToOne(targetEntity="Acao", inversedBy="arrAcaoDadosFundamentalista")
      * @JoinColumn(name="acao_id", referencedColumnName="id", nullable=false)
      */
-    public $objAcao;
+    public Acao $objAcao;
+
+    /**
+     * @var string
+     * @Column(type="string", unique=false, nullable=true)
+     */
+    public $ds_papel;
+
+    /**
+     * @var float
+     * @Column(type="float", unique=false, nullable=true)
+     */
+    public $vl_preco_dia;
 
     /**
      * @var \DateTime
@@ -243,7 +257,7 @@ class AcaoDadosFundamentalista extends BaseModel
     public $vl_giro_ativos;
 
     public function __construct(
-        $objAcao,
+        Acao $objAcao,
         $arrDados
     ) {
         $this->objAcao = $objAcao;
